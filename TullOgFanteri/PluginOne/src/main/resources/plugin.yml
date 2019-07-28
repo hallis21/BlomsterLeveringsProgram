@@ -1,0 +1,21 @@
+name: TestPlugin
+version: 1.0
+main: hkr.plugin.App
+
+commands:
+   played:
+      description: Shows time played on server
+      usage: /played
+      permission: playtime.played
+   playedtop:
+      descriptopm: Shows list of top playtime on the server
+      usage: /playedtop
+      permission: playtime.playedtop
+
+permissions:
+   playtime.played:
+      description: Gives access to /played
+      default: true;
+   playtime.playedtop:
+      description: Gives access to /playedtop
+      default: true;

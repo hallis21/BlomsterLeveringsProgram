@@ -23,8 +23,8 @@ func createLeveranse(ID int) leveranse {
 	return l
 }
 // Setters
-func (l *leveranse) setAddress(husNummer, postNummer int, long, lat float32, funnet bool, gateNavn, leiglighetsNr, postSted string) {
-	l.Adr = adresse{gateNavn, husNummer,leiglighetsNr, postNummer,postSted, coordinate{funnet, long, lat}}
+func (l *leveranse) setAddress(husNummer, postNummer int, gateNavn, leiglighetsNr, postSted string) {
+	l.Adr = adresse{gateNavn, husNummer,leiglighetsNr, postNummer,postSted, coordinate{0,0}}
 }
 
 func (l *leveranse) setPerson(PersonID int, Fornavn, Etternavn, Telefonnummer, Kommentar string){
@@ -58,8 +58,7 @@ type attempt struct {
 }
 
 type coordinate struct {
-	Found bool // Om coords ble funnet, sikkert ikke nødvendig
-	Lat float32
+	Lat float32 
 	Long float32
 }
 

@@ -9,7 +9,5 @@ type NyTest struct {
 }
 
 func main() {
-	b := createLeveranse(5)
-	b.setAddress(23, 1890, "haldenveien", "", "Rakkestad")
-	b.print()
+	leveranser := loadAll();
 }

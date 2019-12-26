@@ -9,8 +9,8 @@ type leveranse struct {
 	LeveranseID int
 	DatoLagd time.Time // Dato lagt til i systemet
 	Adr adresse
+	CorrectGPS bool // Om adressen ble funnet på kartet - om ting stemmer overens
 	Pers person
-	Dato *time.Time
 	LeveringsTid *time.Time
 	ErLevert *bool
 	Attempts *[]attempt
@@ -23,8 +23,8 @@ func createLeveranse(ID int) leveranse {
 	return l
 }
 // Setters
-func (l *leveranse) setAddress(husNummer, postNummer int, gateNavn, leiglighetsNr, postSted string) {
-	l.Adr = adresse{gateNavn, husNummer,leiglighetsNr, postNummer,postSted, coordinate{0,0}}
+func (l *leveranse) setAddress(husNummer, postNummer int, gateNavn, leiglighetsNr string) {
+	l.Adr = adresse{gateNavn, husNummer,leiglighetsNr, postNummer, retrived{}, false}
 }
 
 func (l *leveranse) setPerson(PersonID int, Fornavn, Etternavn, Telefonnummer, Kommentar string){
@@ -32,7 +32,7 @@ func (l *leveranse) setPerson(PersonID int, Fornavn, Etternavn, Telefonnummer, K
 }
 func (l *leveranse) print() {
 	fmt.Println("ID: ", l.LeveranseID)
-	fmt.Println("Adresse:", l.Adr.gateNavn,l.Adr.husNummer,",",l.Adr.postNummer,l.Adr.postSted)
+	fmt.Println("Adresse:", l.Adr.gateNavn,l.Adr.husNummer,",",l.Adr.postNummer)
 }
 
 type adresse struct {
@@ -40,8 +40,8 @@ type adresse struct {
 	husNummer int
 	leiglighetsNr string // 205 || 2A || A
 	postNummer int // typeCheck 4 siffer ved input (ork)
-	postSted string // derived
-	coords coordinate
+	hentetUt retrived
+	provdHentet bool
 }
 type person struct {
 	PersonID int
@@ -57,8 +57,13 @@ type attempt struct {
 	Kommentar string
 }
 
-type coordinate struct {
-	Lat float32 
-	Long float32
+type retrived struct {
+	feilet bool
+	displayName string
+	gateNavn string
+	husNummer string 
+	postNummer string
+	Lat string
+	Lon string
 }
 

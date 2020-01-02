@@ -141,15 +141,23 @@ func main() {
 	// createNode("Ringsby2", "Haldenveien", 21, "?", "Rakkestad")
 	// createNode("Yoyoyoy2", "Peer Gynts vei", 2, "?", "Rakkestad")
 	// purgeAll(true)
-	createNodesInTerminal()
+	// createNodesInTerminal()
 	// n := b
 	// b = n
 	// fmt.Println(n.Lat, n.Lon)
-	noder := getAllNodes(opt{true, true})
+	noder := getAllNodes(opt{false, true})
 	// shortestRoute(noder)
-	fmt.Println(createGEOJSON(getAllNodes(opt{true, true})))
-	fmt.Println("\n")
-	shortestRoute(noder)
+	// fmt.Println(createGEOJSON(getAllNodes(opt{true, true})))
+	// fmt.Println("\n")
+	nC := make([]NodeContainer, len(noder))
+	for i, e := range noder {
+		newC := NodeContainer{}
+		newC.node = e
+		nC[i] = newC
+	}
+	n := shortestRoute(nC)
+	s := createGEOJSONRoute(n)
+	fmt.Println(s)
 	// fmt.Println(n.Lon)
 	// var noder []node
 	// noder = append(noder, n, b)
